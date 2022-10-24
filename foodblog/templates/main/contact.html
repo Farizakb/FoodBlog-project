@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static  %}
+
+{% block title %} Contact {% endblock title %}
+
+{% block content %}
+
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_4.jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-end justify-content-center">
+                <div class="col-md-9 ftco-animate pb-5 text-center">
+                    <h1 class="mb-3 bread">Contact Us</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
+                        class="ion-ios-arrow-forward"></i></a></span> <span>Contact us<i
+                        class="ion-ios-arrow-forward"></i></span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section ftco-no-pb contact-section">
+        <div class="container">
+            <div class="row block-9">
+                <div class="col-md-6 order-md-last d-flex">
+                    <form action="#"  method ="POST"   class="bg-light p-5 contact-form">
+                        {% csrf_token %}
+                     
+                        {{form}}
+                        <input class="btn btn-primary mt-3" type="submit" value="Submit">
+                        
+                    </form>
+
+                </div>
+
+                <div class="col-md-6 d-flex">
+                    <div id="map" class="bg-white"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+{% endblock content %}
