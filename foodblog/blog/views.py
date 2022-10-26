@@ -2,9 +2,9 @@ from django.shortcuts import redirect, render,get_list_or_404
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.views.generic import ListView, DetailView, TemplateView, CreateView,UpdateView 
+from django.utils.translation import gettext_lazy as _
 # Create your views here.
 from .models import Recipe, Catagory
 from .forms import RecipeForm
@@ -45,7 +45,7 @@ class CreateRecipe(LoginRequiredMixin,CreateView):
         return super().form_valid(form)
 
     def get_success_url(self) -> str:
-        messages.add_message(self.request,messages.SUCCESS, "Yen resept yaradildi")
+        messages.add_message(self.request,messages.SUCCESS, _("Yeni resept yaradildi"))
         return super().get_success_url()
 
 
@@ -56,7 +56,7 @@ class UpadateRecipe(UpdateView):
     form_class = RecipeForm
 
     def get_success_url(self) -> str:
-        messages.add_message(self.request,messages.SUCCESS, "Yen resept yaradildi")
+        messages.add_message(self.request,messages.SUCCESS, _("Yen resept yaradildi"))
         return super().get_success_url()
     
 
@@ -70,7 +70,6 @@ def recipe_list(request):
         "recipes":recipes
     }
     return render(request, 'blog/recipes.html',context)
-
 
 @login_required
 def stories_list(request):

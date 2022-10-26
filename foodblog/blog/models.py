@@ -37,6 +37,7 @@ class Recipe(AbstractModel):
     tags = models.ManyToManyField(Tag)
     
     title = models.CharField(max_length = 100,db_index =True)
+    slug = models.SlugField(max_length = 150,db_index = True)
     short_description = models.CharField(max_length = 255)
     description = models.TextField()
     image = models.ImageField(upload_to = 'recipe')

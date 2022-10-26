@@ -57,3 +57,24 @@
 
 
 
+
+
+
+# class View:
+#     def __init__(self,**kwargs):
+#         self.name = "eles"
+#         self.surname = "gerov"
+#         self.number = kwargs["number"]
+#     password = 2
+#     email = "elesgerovzafiyet"
+# class EmailView(View):
+#     def show_properties(self):
+#         print(self.password)
+#         print(self.name)
+#         print(self.email)
+#         print(self.surname)
+#         print(self.number)
+        
+        
+# y = EmailView(number="0890909")
+# y.show_properties()
