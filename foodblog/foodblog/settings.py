@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from asyncio import tasks
 from pathlib import Path
 from datetime import timedelta
 
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'django_filters',
-    "corsheaders",
+    'corsheaders',
+    'django_celery_beat',
     
     
     
@@ -56,6 +58,23 @@ INSTALLED_APPS = [
     'account',
     'blog',
 ]
+
+
+
+# django_celery/settings.py
+
+# ...
+
+# Celery settings
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+CELERYBEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+CELERY_TIMEZONE = "Asia/Baku"
+
+# 1. Backround tasks
+# 2. Paralel
+# 3. Schedule
+
 
 
 #<-------Social Media Login----------->

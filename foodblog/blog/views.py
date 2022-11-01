@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render,get_list_or_404
+from django.shortcuts import HttpResponse, redirect, render,get_list_or_404
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -81,3 +81,6 @@ def like_recipe(request,id):
     request.session["liked_recipes"] = request.session.get("liked_recipes","") + str(id) + "," 
     messages.success(request,"Recipe like edildi")
     return redirect('recipes')
+
+
+
