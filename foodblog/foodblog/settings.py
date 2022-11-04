@@ -35,15 +35,6 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     
     'modeltranslation',
-    'social_django',
-    'rest_framework',
-    'rest_framework_simplejwt',
-    'django_filters',
-    'corsheaders',
-    'django_celery_beat',
-    
-    
-    
     # Default
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,6 +42,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    
+    #Packages
+    'social_django',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'django_filters',
+    'corsheaders',
+    'django_celery_beat',
+    'drf_yasg',
+    
     
     
     # Custom

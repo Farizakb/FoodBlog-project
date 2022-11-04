@@ -1,5 +1,31 @@
 from rest_framework import serializers
 from blog.models import Recipe, Catagory
+from drf_yasg.utils import swagger_serializer_method
+
+
+
+
+class RecipeCreateSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Recipe
+        fields = (
+            'id',
+            'title',
+            'short_description',
+            'description',
+            'image',
+            'tags',
+            # 'author',
+            'catagory',
+            'created_at',
+            'updated_at',
+        )
+    def validate(self, attrs):
+        request = self.context['request']
+        attrs['author'] = request.user
+        return super().validate(attrs)
+
 
 
 class CatagoryRecipeSerializer(serializers.ModelSerializer):
@@ -12,8 +38,8 @@ class CatagoryRecipeSerializer(serializers.ModelSerializer):
             'title',
             'image',
             'recipes',
-        )
-
+        ) 
+    @swagger_serializer_method(serializer_or_field=RecipeCreateSerializer)
     def get_recipes(self,obj):
         serializer = RecipeCreateSerializer(obj.recipe.all(),context = self.context,many =True)
         return serializer.data 
@@ -50,27 +76,5 @@ class RecipeReadCatagorySerializer(serializers.ModelSerializer):
         )
         
         
-class RecipeCreateSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = Recipe
-        fields = (
-            'id',
-            'title',
-            'short_description',
-            'description',
-            'image',
-            'tags',
-            # 'author',
-            'catagory',
-            'created_at',
-            'updated_at',
-        )
-    def validate(self, attrs):
-        request = self.context['request']
-        attrs['author'] = request.user
-        return super().validate(attrs)
-
-
 
 
