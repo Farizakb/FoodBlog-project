@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from asyncio import tasks
+import os
 from pathlib import Path
 from datetime import timedelta
+from tkinter import N
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,8 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-g46khqa(m39l3x5c*e#*whe(@t@_mu2=0=ut*@l=znu8jnb^y#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = False  if os.environ.get("DEBUG") else True 
+PROD = not DEBUG
 ALLOWED_HOSTS = ['*']
 
 
@@ -171,11 +173,11 @@ AUTH_USER_MODEL = 'account.User'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Blog',
-        'USER': 'Fariz',
-        'PASSWORD': 12345,
-        'HOST': 'localhost',
-        'PORT': 5432
+        'NAME':  os.environ.get('POSTGRES_DB','Blog'),
+        'USER': os.environ.get('POSTGRES_USER','Fariz'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD',12345),
+        'HOST': os.environ.get('POSTGRES_HOST','localhost'),
+        'PORT': os.environ.get('POSTGRES_PORT',5432)
     }
 }
 
@@ -286,9 +288,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+if PROD:
+    STATIC_ROOT = BASE_DIR / 'static'
+else:
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static',    
+    ]   
 
 STATIC_URL = 'static/'
 
