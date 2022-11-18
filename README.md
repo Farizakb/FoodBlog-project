@@ -1,2 +1,2 @@
 # FoodBlog
-This e-commerce project was created via django 
+This FoodBlog project was created via django 
